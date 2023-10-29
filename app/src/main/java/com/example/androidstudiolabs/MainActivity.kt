@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val langs = listOf("Kotlin", "Java", "JavaScript", "Scala")
             Column{
-                for(lang in langs){
+                langs.forEach{lang ->
                     Text(text = lang, fontSize = 28.sp)
                 }
             }
