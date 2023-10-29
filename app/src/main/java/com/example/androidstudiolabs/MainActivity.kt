@@ -3,41 +3,34 @@ package com.example.androidstudiolabs
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.androidstudiolabs.ui.theme.AndroidStudioLabsTheme
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AndroidStudioLabsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
+            val setContentMessage = "Hello setContent"
+            Column{
+                val columnMessage = "Hello Column"
+                Row{
+                    Text(text = setContentMessage, fontSize = 28.sp)
                 }
+                Row{
+                    Text(text = columnMessage, fontSize = 28.sp)
+                }
+                Row{
+                    val rowMessage = "Hello Row 1"
+                    Text(text = rowMessage, fontSize = 28.sp)
+                }
+                Row{
+                    val rowMessage = "Hello Row 2"
+                    Text(text = rowMessage, fontSize = 28.sp)
+                }
+
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AndroidStudioLabsTheme {
-        Greeting("Android")
     }
 }
