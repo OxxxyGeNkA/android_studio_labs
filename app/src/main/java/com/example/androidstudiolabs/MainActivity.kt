@@ -3,7 +3,7 @@ package com.example.androidstudiolabs
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.material3.Text
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
                         "\n" +
                         "...............",
                 fontSize=22.sp,
-                modifier = Modifier.background(color= Color.Yellow).horizontalScroll(ScrollState(0))
+                modifier = Modifier.background(color= Color.Yellow).horizontalScroll(rememberScrollState())
             )
         }
     }
