@@ -26,7 +26,7 @@ fun CircleItem() {
     }
     Box(
         modifier = Modifier
-            .size(100.dp)
+            .size(200.dp)
             .background(color = color.value, shape = CircleShape)
             .clickable {
                 when (counter.value++) {
@@ -41,7 +41,7 @@ fun CircleItem() {
     ) {
         Text(
             text = counter.value.toString(),
-            style = TextStyle(color = Color.White, fontSize = 20.sp)
+            style = TextStyle(color = Color.White, fontSize = 32.sp)
         )
     }
 }
