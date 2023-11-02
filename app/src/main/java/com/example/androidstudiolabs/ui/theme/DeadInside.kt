@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,15 +20,16 @@ fun DeadInside() {
     val checkedState = remember { mutableStateOf(false) }
     val checkedValue = checkedState.value
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-        Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally) {
+        Column (modifier = Modifier.fillMaxWidth(),horizontalAlignment = Alignment.CenterHorizontally) {
             Row(verticalAlignment = Alignment.Top) {
                 Checkbox(checked = checkedValue, onCheckedChange = { value -> checkedState.value = value })
                 Text(text = "Переключалка", fontSize = 32.sp)
             }
             if (checkedValue) {
-                Text(text = "Dead Inside", fontSize = 32.sp, textAlign = TextAlign.Center)
+                Text(text = "DeadInside mode on", fontSize = 32.sp, textAlign = TextAlign.Center)
             }
         }
     }
