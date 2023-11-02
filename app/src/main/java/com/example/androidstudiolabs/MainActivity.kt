@@ -28,7 +28,11 @@ class MainActivity : ComponentActivity() {
                         content = {Icon(Icons.Filled.Add, contentDescription = "Добавить")},
                         onClick = {
                             scope.launch {
-                                snackbarHostState.showSnackbar("Count: ${++count.value}")
+                                val result = snackbarHostState.showSnackbar("Count: ${count.value}", "Click")
+                                when (result) {
+                                    SnackbarResult.ActionPerformed -> { count.value++; }
+                                    SnackbarResult.Dismissed -> { count.value--; }
+                                }
                             }
                         }
                     )
