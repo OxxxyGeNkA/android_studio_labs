@@ -1,10 +1,16 @@
 package com.example.androidstudiolabs
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.ColumnScopeInstance.weight
+import androidx.compose.foundation.layout.Row
+//import androidx.compose.foundation.layout.RowScopeInstance.weight
+//import androidx.compose.foundation.layout.ColumnScopeInstance.weight
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -16,17 +22,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
+    //@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Scaffold(
                 topBar = {
-                    TopAppBar {
-                        IconButton(onClick = { }) {Icon(Icons.Filled.Menu, contentDescription = "Меню") }
-                        Text("METANIT.COM", fontSize = 22.sp)
-                        Spacer(Modifier.weight(1f, true))
-                        IconButton(onClick = { }) { Icon(Icons.Filled.Search, contentDescription = "Поиск" ) }
+                    TopAppBar (title = {}, navigationIcon = {
+                        Row() {
+                            IconButton(onClick = { }) {
+                                Icon(
+                                    Icons.Filled.Menu,
+                                    contentDescription = "Меню"
+                                )
+                            }
+                            Text("METANIT.COM", fontSize = 22.sp)
+                            Spacer(Modifier.weight(1f, true))
+                            IconButton(onClick = { }) {
+                                Icon(
+                                    Icons.Filled.Search,
+                                    contentDescription = "Поиск"
+                                )
+                            }
+                        }
                     }
+                    )
+
+
                 },
                 bottomBar = {
                     BottomAppBar{
@@ -34,10 +57,8 @@ class MainActivity : ComponentActivity() {
                         Spacer(Modifier.weight(1f, true))
                         IconButton(onClick = {  }) { Icon(Icons.Filled.Info, contentDescription = "Информация о приложении")}
                     }
-                }
-            ){
-                Text("Hello Scaffold", fontSize = 28.sp)
-            }
+                }, content = {innerPadding -> Text(text = "Hello Scaffold", fontSize = 28.sp, modifier = Modifier.padding(innerPadding))}
+            )
         }
     }
 }
