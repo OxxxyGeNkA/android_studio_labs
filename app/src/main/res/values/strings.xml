@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidStudioLabs</string>
+    <string name="message">Hello METANIT.COM</string>
+    <string name="user_data">Имя: %1$s. Возраст: %2$d. Компания: %3$s</string>
 </resources>
