@@ -21,11 +21,9 @@ class MainActivity : ComponentActivity() {
                 drawerState = drawerState,
                 drawerContent={
                     ModalDrawerSheet {
-
                         Text("Пункт меню 1", fontSize = 28.sp)
                         Text("Пункт меню 2", fontSize = 28.sp)
                         Text("Пункт меню 3", fontSize = 28.sp)
-
                     }
                 }
             ){
