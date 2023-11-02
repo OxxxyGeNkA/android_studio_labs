@@ -24,12 +24,18 @@ fun DeadInside() {
         contentAlignment = Alignment.Center
     ) {
         Column (modifier = Modifier.fillMaxWidth(),horizontalAlignment = Alignment.CenterHorizontally) {
-            Row(verticalAlignment = Alignment.Top) {
-                Checkbox(checked = checkedValue, onCheckedChange = { value -> checkedState.value = value })
-                Text(text = "Переключалка", fontSize = 32.sp)
+            Box() {
+                if (checkedValue) {
+                    Text(text = "DeadInside mode on", fontSize = 32.sp, textAlign = TextAlign.Center)
+                }
             }
-            if (checkedValue) {
-                Text(text = "DeadInside mode on", fontSize = 32.sp, textAlign = TextAlign.Center)
+            Box() {
+                Row(verticalAlignment = Alignment.Top) {
+                    Checkbox(
+                        checked = checkedValue,
+                        onCheckedChange = { value -> checkedState.value = value })
+                    Text(text = "Поletmedieм?)", fontSize = 32.sp)
+                }
             }
         }
     }
