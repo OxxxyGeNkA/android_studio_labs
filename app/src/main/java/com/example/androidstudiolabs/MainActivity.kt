@@ -3,41 +3,25 @@ package com.example.androidstudiolabs
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.androidstudiolabs.ui.theme.AndroidStudioLabsTheme
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AndroidStudioLabsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
+            Column {
+                Text(text = "Hello (Center)", modifier = Modifier.fillMaxWidth(1f) ,  fontSize=22.sp, textAlign = TextAlign.Center)
+                Text(text = "Hello (Justify)", modifier = Modifier.fillMaxWidth(1f),  fontSize=22.sp, textAlign = TextAlign.Justify)
+                Text(text = "Hello (Left)", modifier = Modifier.fillMaxWidth(1f),  fontSize=22.sp, textAlign = TextAlign.Left)
+                Text(text = "Hello (Right)", modifier = Modifier.fillMaxWidth(1f),  fontSize=22.sp, textAlign = TextAlign.Right)
+                Text(text = "Hello (Start)", modifier = Modifier.fillMaxWidth(1f),  fontSize=22.sp, textAlign = TextAlign.Start)
+                Text(text = "Hello (End)", modifier = Modifier.fillMaxWidth(1f),  fontSize=22.sp, textAlign = TextAlign.End)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AndroidStudioLabsTheme {
-        Greeting("Android")
     }
 }
