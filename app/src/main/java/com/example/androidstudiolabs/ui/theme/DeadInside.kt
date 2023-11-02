@@ -1,5 +1,8 @@
 package com.example.androidstudiolabs.ui.theme
 
+import android.content.Context
+import android.media.MediaPlayer
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,9 +20,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.*
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.imageResource
+import com.example.androidstudiolabs.R
 
 @Composable
-fun DeadInside() {
+fun DeadInside() : Boolean {
+
     val checkedState = remember { mutableStateOf(false) }
     val checkedValue = checkedState.value
     Box(
@@ -27,10 +34,15 @@ fun DeadInside() {
         contentAlignment = Alignment.Center
     ) {
         Column (modifier = Modifier.fillMaxWidth(),horizontalAlignment = Alignment.CenterHorizontally) {
-            Box(modifier = Modifier.fillMaxHeight().weight(1f))
+            Box(modifier = Modifier.fillMaxHeight().weight(1f),
+                contentAlignment = Alignment.Center
+            )
             {
                 if (checkedValue) {
-
+                    Image(
+                        bitmap = ImageBitmap.imageResource(R.drawable.deadinside),
+                        contentDescription = "Поletmedieм?)"
+                    )
                 }
             }
             Box(modifier = Modifier.height(60.dp)) {
@@ -52,4 +64,5 @@ fun DeadInside() {
             }
         }
     }
+    return checkedValue
 }
