@@ -17,6 +17,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val curTrack = remember { mutableStateOf(0) }
             var hz = DeadInside()
+            ghoulPlayer.setOnCompletionListener {
+                ghoulPlayer.stop()
+            }
             if (hz && !ghoulPlayer.isPlaying) {
                 ghoulPlayer = MediaPlayer.create(baseContext, ghoulMusics[curTrack.value])
                 ghoulPlayer.start()
