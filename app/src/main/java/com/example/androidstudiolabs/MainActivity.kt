@@ -29,7 +29,7 @@ import com.android.volley.toolbox.Volley
 import com.example.androidstudiolabs.ui.theme.AndroidStudioLabsTheme
 import org.json.JSONObject
 
-const val API_KEY = "e0c73962d01442d0dec451cb6fb4da36"
+const val API_KEY = "4049722188974c9c30103d0f7334db13"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,11 +87,15 @@ fun DefaultPreview() {
 }
 
 fun getData(name: String, context: Context, mState: MutableState<String>){
-    val url = "https://api.openweathermap.org/data/2.5/forecast/daily" +
+    /*val url = "https://api.openweathermap.org/data/2.5/forecast/daily" +
             "?appid=$API_KEY" +
             "&q=$name" +
             "&units=metric" +
-            "&cnt=1"
+            "&cnt=1"*/
+    val url = "https://api.openweathermap.org/data/2.5/weather" +
+            "?appid=$API_KEY" +
+            "&q=$name" +
+            "&units=metric"
     val queue = Volley.newRequestQueue(context)
     val stringRequest = StringRequest(
         Request.Method.GET,
@@ -99,11 +103,15 @@ fun getData(name: String, context: Context, mState: MutableState<String>){
         {
                 response->
             val obj = JSONObject(response)
-            val list = obj.getJSONArray("list")
-            val temp = list.getJSONObject(0).getJSONObject("temp")
+
+            //val list = obj.getJSONArray("list")
+            //val temp = list.getJSONObject(0).getJSONObject("temp")
             //val tempday = temp.getString("day")
-            mState.value = temp.getString("day")
+            //mState.value = temp.getString("day")
             //Log.d("MyLog","Response: ${temp.getString("temp_c")}")
+
+            val main = obj.getJSONObject("main")
+            mState.value = main.getString("temp")
         },
         {
             //Log.d("MyLog","Volley error: $it")
