@@ -21,13 +21,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.androidstudiolabs.ui.theme.WeatherAppComposeTheme
+import com.example.androidstudiolabs.ui.theme.AndroidStudioLabsTheme
 import org.json.JSONObject
 
 const val API_KEY = "e0c73962d01442d0dec451cb6fb4da36"
@@ -35,7 +34,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WetherAppComposeTheme {
+            AndroidStudioLabsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -82,16 +81,17 @@ fun Greeting(name: String, context: Context) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    WetherAppComposeTheme {
+    AndroidStudioLabsTheme {
 
     }
 }
 
 fun getData(name: String, context: Context, mState: MutableState<String>){
-    val url = "https://api.weatherapi.com/v1/current.json" +
-            "?key=$API_KEY&" +
-            "q=$name" +
-            "&aqi=no"
+    val url = "https://api.openweathermap.org/data/2.5/forecast/daily" +
+            "?appid=$API_KEY" +
+            "&q=$name" +
+            "&units=metric" +
+            "&cnt=1"
     val queue = Volley.newRequestQueue(context)
     val stringRequest = StringRequest(
         Request.Method.GET,
@@ -99,12 +99,14 @@ fun getData(name: String, context: Context, mState: MutableState<String>){
         {
                 response->
             val obj = JSONObject(response)
-            val temp = obj.getJSONObject("current")
-            mState.value = temp.getString("temp_c")
-            Log.d("MyLog","Response: ${temp.getString("temp_c")}")
+            val list = obj.getJSONArray("list")
+            val temp = list.getJSONObject(0).getJSONObject("temp")
+            //val tempday = temp.getString("day")
+            mState.value = temp.getString("day")
+            //Log.d("MyLog","Response: ${temp.getString("temp_c")}")
         },
         {
-            Log.d("MyLog","Volley error: $it")
+            //Log.d("MyLog","Volley error: $it")
         }
     )
     queue.add(stringRequest)
