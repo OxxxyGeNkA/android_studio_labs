@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.example.androidstudiolabs.ui.theme.AndroidStudioLabsTheme
 import com.example.androidstudiolabs.ui.theme.DeadInside
 
 class MainActivity : ComponentActivity() {
@@ -16,31 +17,34 @@ class MainActivity : ComponentActivity() {
         var ghoulPlayer = MediaPlayer.create(baseContext, ghoulMusics[0])
         super.onCreate(savedInstanceState)
         setContent {
-            val curTrack = remember { mutableStateOf(0) }
-            val onPause = remember { mutableStateOf(false) }
-            var hz = DeadInside()
-            if (hz && !ghoulPlayer.isPlaying) {
-                if (!onPause.value) {
-                    ghoulPlayer = MediaPlayer.create(baseContext, ghoulMusics[curTrack.value])
-                }
-                //ghoulPlayer = MediaPlayer.create(baseContext, fastMusic[curTrack.value])
-                ghoulPlayer.start()
-                ghoulPlayer.setOnCompletionListener {
-                    curTrack.value += 1
-                    if (curTrack.value == 5) {
-                        curTrack.value = 0
+            AndroidStudioLabsTheme (darkTheme = false){
+                val curTrack = remember { mutableStateOf(0) }
+                val onPause = remember { mutableStateOf(false) }
+                var hz = DeadInside()
+                if (hz && !ghoulPlayer.isPlaying) {
+
+                    if (!onPause.value) {
+                        ghoulPlayer = MediaPlayer.create(baseContext, ghoulMusics[curTrack.value])
                     }
-                    onPause.value = false
+                    //ghoulPlayer = MediaPlayer.create(baseContext, fastMusic[curTrack.value])
+                    ghoulPlayer.start()
+                    ghoulPlayer.setOnCompletionListener {
+                        curTrack.value += 1
+                        if (curTrack.value == 5) {
+                            curTrack.value = 0
+                        }
+                        onPause.value = false
+                    }
+                    //Toast.makeText(this, "Play", Toast.LENGTH_SHORT).show()
                 }
-                //Toast.makeText(this, "Play", Toast.LENGTH_SHORT).show()
-            }
 
 
-            if (!hz && ghoulPlayer.isPlaying) {
-                //Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show()
-                ghoulPlayer.pause()
-                onPause.value = true
-                //ghoulPlayer = MediaPlayer.create(baseContext, ghoulMusics[0])
+                if (!hz && ghoulPlayer.isPlaying) {
+                    //Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show()
+                    ghoulPlayer.pause()
+                    onPause.value = true
+                    //ghoulPlayer = MediaPlayer.create(baseContext, ghoulMusics[0])
+                }
             }
         }
     }
