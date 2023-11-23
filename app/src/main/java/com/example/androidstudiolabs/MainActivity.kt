@@ -3,41 +3,47 @@ package com.example.androidstudiolabs
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.androidstudiolabs.ui.theme.AndroidStudioLabsTheme
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.github.javafaker.Faker
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AndroidStudioLabsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
-            }
+            MyScreen()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
+fun CityItem(text: String) {
+    Text(text = text, fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(5.dp))
 }
-
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    AndroidStudioLabsTheme {
-        Greeting("Android")
+fun MyScreen() {
+    val faker = Faker()
+    val citiz = remember {
+        (1..500).map{ faker.address().city() }.toMutableStateList() //10000 - не загрузится
+    }
+    Column(modifier = Modifier.verticalScroll(ScrollState(0), true)) {
+        TextButton(onClick = { citiz.add(faker.address().city()) }) {
+            CityItem("+")
+        }
+        citiz.forEach {
+            key(it) { CityItem(it) }
+        }
     }
 }
