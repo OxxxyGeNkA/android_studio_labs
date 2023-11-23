@@ -17,7 +17,6 @@ class MyViewModel1 : ViewModel() {
     val i = mutableStateOf(0)
 }
 
-//ViewModel1
 @Composable
 fun Screen1(myViewModel: MyViewModel1 = viewModel()) {
     var i by myViewModel.i
@@ -28,7 +27,6 @@ fun Screen1(myViewModel: MyViewModel1 = viewModel()) {
 }
 
 class MainActivity : ComponentActivity() {
-    // val viewModel: MyViewModel1 by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
