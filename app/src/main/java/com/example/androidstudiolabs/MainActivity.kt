@@ -36,7 +36,7 @@ fun CityItem(text: String) {
 fun MyScreen() {
     val faker = Faker()
     val citiz = remember {
-        (1..500).map{ faker.address().city() }.toMutableStateList() //10000 - не загрузится
+        (1..50000).map{ faker.address().city() }.toMutableStateList() //10000 - не загрузится
     }
     Column(modifier = Modifier.verticalScroll(ScrollState(0), true)) {
         TextButton(onClick = { citiz.add(faker.address().city()) }) {
